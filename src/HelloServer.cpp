@@ -10,6 +10,7 @@ ESP8266WebServer server(80);
 const int led = 2;
 bool etatLed = 0;
 char texteEtatLed[2][10] = {"ÉTEINTE!","ALLUMÉE!"};
+#test
 
 void handleRoot()
 {
