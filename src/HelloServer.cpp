@@ -1,9 +1,7 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
-std::string page =
-#include <homepage.html>
-;
+
 
 const char *ssid = "Nom du réseau auquel vous voulez vous connecter";
 const char *password = "Mot de passe du réseau auquel vous voulez vous connecter";
@@ -17,7 +15,32 @@ void handleRoot()
 {
     String page = "<!DOCTYPE html>";
 
-    
+    page += "<html lang='fr'>";
+
+    page += "<head>";
+    page += "    <title>Serveur ESP8266</title>";
+    page += "    <meta http-equiv='refresh' content='60' name='viewport' content='width=device-width, initial-scale=1' charset='UTF-8' />";
+    page += "    <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>";
+    page += "</head>";
+
+    page += "<body>";
+    page += "    <div class='w3-card w3-blue w3-padding-small w3-jumbo w3-center'>";
+    page += "        <p>ÉTAT LED: "; page += texteEtatLed[etatLed]; + "</p>";
+    page += "    </div>";
+
+    page += "    <div class='w3-bar'>";
+    page += "        <a href='/on' class='w3-bar-item w3-button w3-border w3-jumbo' style='width:50%; height:50%;'>ON</a>";
+    page += "        <a href='/off' class='w3-bar-item w3-button w3-border w3-jumbo' style='width:50%; height:50%;'>OFF</a>";
+    page += "    </div>";
+
+    page += "    <div class='w3-center w3-padding-16'>";
+    page += "        <p>Ce serveur est hébergé sur un ESP8266</p>";
+    page += "        <i>Créé par Florian Vandecasteele</i>";
+    page += "    </div>";
+
+    page += "</body>";
+
+    page += "</html>";
 
     server.setContentLength(page.length());
     server.send(200, "text/html", page);
